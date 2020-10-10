@@ -10,6 +10,7 @@ set(ganesha_trace_LIB_SRCS
   nfs_rpc.c
   state.c
   fsal_gluster.c
+  fsal_rgw.c
 )
 
 add_library(ganesha_trace MODULE ${ganesha_trace_LIB_SRCS})

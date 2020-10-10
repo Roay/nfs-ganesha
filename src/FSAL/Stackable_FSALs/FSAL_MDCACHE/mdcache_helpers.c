@@ -51,6 +51,7 @@
 #include "mdcache_avl.h"
 #ifdef USE_LTTNG
 #include "gsh_lttng/mdcache.h"
+#include "gsh_lttng/fsal_rgw.h"
 #endif
 
 #define mdc_chunk_first_dirent(c) \
@@ -1221,7 +1222,10 @@ fsal_status_t mdc_lookup(mdcache_entry_t *mdc_parent, const char *name,
 
 	LogFullDebugAlt(COMPONENT_NFS_READDIR, COMPONENT_CACHE_INODE,
 			"Lookup %s", name);
-
+	// add trace point
+#ifdef USE_LTTNG
+	tracepoint(fsalrgw, tp_mdcache, __func__, __LINE__, NULL);
+#endif
 	/* ".." doesn't end up in the cache */
 	if (!strcmp(name, "..")) {
 		struct mdcache_fsal_export *export = mdc_cur_export();

@@ -2,6 +2,12 @@ add_definitions(
   -D_FILE_OFFSET_BITS=64
 )
 
+if(USE_LTTNG)
+  include_directories(
+    ${LTTNG_INCLUDE_DIR}
+  )
+endif(USE_LTTNG)
+
 SET(fsalrgw_LIB_SRCS
   up.c
   main.c
@@ -21,6 +27,7 @@ target_link_libraries(fsalrgw
   ganesha_nfsd
   ${RGW_LIBRARIES}
   ${SYSTEM_LIBRARIES}
+  ${LTTNG_LIBRARIES}
   "-Wl,--no-undefined"
 )
 

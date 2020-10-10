@@ -73,6 +73,7 @@
 #include "gsh_lttng/state.h"
 #include "gsh_lttng/fsal_mem.h"
 #include "gsh_lttng/fsal_gluster.h"
+#include "gsh_lttng/fsal_rgw.h"
 #endif /* USE_LTTNG */
 
 /* parameters for NFSd startup and default values */

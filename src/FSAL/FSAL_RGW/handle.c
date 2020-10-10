@@ -35,6 +35,9 @@
 #include "internal.h"
 #include "nfs_exports.h"
 #include "FSAL/fsal_commonlib.h"
+#ifdef USE_LTTNG
+#include "gsh_lttng/fsal_rgw.h"
+#endif
 
 /**
  * @brief Release an object
@@ -93,6 +96,11 @@ static fsal_status_t lookup_int(struct fsal_obj_handle *dir_hdl,
 
 	LogFullDebug(COMPONENT_FSAL,
 		"%s enter dir_hdl %p path %s", __func__, dir_hdl, path);
+
+	// add trace point
+#ifdef USE_LTTNG
+	tracepoint(fsalrgw, tp_mdcache, __func__, __LINE__, NULL);
+#endif
 
 	rc = rgw_lookup(export->rgw_fs, dir->rgw_fh, path, &rgw_fh,
 			rcb_st, rcb_st_mask, flags);
